@@ -37,12 +37,7 @@ func main() {
 		fmt.Println(result)
 		personsData := getPersonfromData(result)
 		fmt.Println(personsData)
-		average, count := 0, 0
-		for _, v := range personsData {
-			count++
-			average += v.age
-		}
-		fmt.Printf("Средний возраст: %d", average/count)
+		fmt.Printf("Средний возраст: %d", calcAverageAge(personsData))
 	case 1:
 		result, err := csvReader.ReadLargeCSV(path)
 		if err != nil {
@@ -52,12 +47,7 @@ func main() {
 		fmt.Println(result)
 		personsData := getPersonfromData(result)
 		fmt.Println(personsData)
-		average, count := 0, 0
-		for _, v := range personsData {
-			count++
-			average += v.age
-		}
-		fmt.Printf("Средний возраст: %d", average/count)
+		fmt.Printf("Средний возраст: %d", calcAverageAge(personsData))
 	}
 }
 
@@ -73,4 +63,13 @@ func getPersonfromData(dataPErson [][]string) []Person {
 		})
 	}
 	return persons
+}
+
+func calcAverageAge(data []Person) int {
+	average, count := 0, 0
+	for _, v := range data {
+		count++
+		average += v.age
+	}
+	return average / count
 }
